@@ -74,3 +74,14 @@ API Accordingly to the Task
 - GetAnnotations
 - UpdateAnnotation
 - DeleteAnnotation
+
+
+### Auth
+
+Service uses internal token auth. I couldn't add passing token fields in swagger so I would recommend to use browser plugins to add proper headers to your HTTP request
+
+TOKENS -> ./config/auth_tokens.go
+
+Headers:
+- "x-service-name"
+- "x-internal-token"

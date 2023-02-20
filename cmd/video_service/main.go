@@ -2,15 +2,16 @@ package main
 
 import (
 	"context"
-	"github.com/ngunthor/papercup-task/config"
-	"github.com/ngunthor/papercup-task/internal/services/video_service"
+	"github.com/ngunthor/papercup-task/internal/auth"
 
 	_ "github.com/lib/pq"
 	servicepb "github.com/ngunthor/papercup-task/api/gen/v1"
+	"github.com/ngunthor/papercup-task/config"
 	"github.com/ngunthor/papercup-task/internal/pkg/components/annotation"
 	"github.com/ngunthor/papercup-task/internal/pkg/components/video"
 	"github.com/ngunthor/papercup-task/internal/pkg/storage"
 	youtubeAdapter "github.com/ngunthor/papercup-task/internal/pkg/youtube"
+	"github.com/ngunthor/papercup-task/internal/services/video_service"
 	rkboot "github.com/rookie-ninja/rk-boot"
 	rkgrpc "github.com/rookie-ninja/rk-grpc/boot"
 	"github.com/xlab/closer"
@@ -33,6 +34,7 @@ func main() {
 	grpcEntry.AddRegFuncGrpc(registerVideoService)
 	// Register grpc-video_service registration function
 	grpcEntry.AddRegFuncGw(servicepb.RegisterVideoServiceHandlerFromEndpoint)
+	grpcEntry.AddUnaryInterceptors(auth.NewTokenAuthServerInterceptor(auth.HeaderTokenDefault, config.AuthTokes))
 
 	// Bootstrap
 	boot.Bootstrap(context.Background())
