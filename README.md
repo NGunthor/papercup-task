@@ -1,4 +1,4 @@
-# checkout-task
+# Papercup-task
 
 This is a simple application on grpc with provided swagger
 
