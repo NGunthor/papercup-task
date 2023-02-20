@@ -1,0 +1,5 @@
+version: v1beta1
+name: github.com/ngunthor/papercup-task
+build:
+  roots:
+    - api

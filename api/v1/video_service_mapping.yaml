@@ -1,0 +1,21 @@
+type: google.api.Service
+config_version: 3
+
+# Please refer google.api.Http in https://github.com/googleapis/googleapis/blob/master/google/api/http.proto file for details.
+http:
+  rules:
+    - selector: api.v1.VideoService.CreateVideo
+      post: /api/v1/videos
+      body: "*"
+    - selector: api.v1.VideoService.DeleteVideo
+      delete: /api/v1/videos/{VideoID}
+    - selector: api.v1.VideoService.CreateAnnotation
+      post: /api/v1/videos/{AnnotationMeta.VideoID}/annotations
+      body: "*"
+    - selector: api.v1.VideoService.GetAnnotations
+      get: /api/v1/videos/{VideoID}/annotations
+    - selector: api.v1.VideoService.UpdateAnnotation
+      put: /api/v1/annotations/{Annotation.ID}
+      body: "*"
+    - selector: api.v1.VideoService.DeleteAnnotation
+      delete: /api/v1/annotations/{AnnotationID}

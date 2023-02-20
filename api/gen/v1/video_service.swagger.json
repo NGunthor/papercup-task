@@ -1,0 +1,379 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "v1/video_service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "VideoService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/annotations/{Annotation.ID}": {
+      "put": {
+        "summary": "Updates Annotation",
+        "operationId": "VideoService_UpdateAnnotation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateAnnotationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Annotation.ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Annotation": {
+                  "type": "object",
+                  "properties": {
+                    "AnnotationMeta": {
+                      "$ref": "#/definitions/v1AnnotationMeta"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "VideoService"
+        ]
+      }
+    },
+    "/api/v1/annotations/{AnnotationID}": {
+      "delete": {
+        "summary": "Deletes Annotation",
+        "operationId": "VideoService_DeleteAnnotation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteAnnotationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "AnnotationID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "VideoService"
+        ]
+      }
+    },
+    "/api/v1/videos": {
+      "post": {
+        "summary": "Creates Video",
+        "operationId": "VideoService_CreateVideo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateVideoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateVideoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "VideoService"
+        ]
+      }
+    },
+    "/api/v1/videos/{AnnotationMeta.VideoID}/annotations": {
+      "post": {
+        "summary": "Creates Annotation",
+        "operationId": "VideoService_CreateAnnotation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateAnnotationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "AnnotationMeta.VideoID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "AnnotationMeta": {
+                  "type": "object",
+                  "properties": {
+                    "Start": {
+                      "type": "string",
+                      "title": "should be in format mm:ss"
+                    },
+                    "End": {
+                      "type": "string",
+                      "title": "should be in format mm:ss"
+                    },
+                    "Type": {
+                      "type": "string"
+                    },
+                    "Notes": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "VideoService"
+        ]
+      }
+    },
+    "/api/v1/videos/{VideoID}": {
+      "delete": {
+        "summary": "Deletes Video",
+        "operationId": "VideoService_DeleteVideo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteVideoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "VideoID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "VideoService"
+        ]
+      }
+    },
+    "/api/v1/videos/{VideoID}/annotations": {
+      "get": {
+        "summary": "Returns all Video's Annotation",
+        "operationId": "VideoService_GetAnnotations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAnnotationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "VideoID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "VideoService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1Annotation": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string",
+          "format": "int64"
+        },
+        "AnnotationMeta": {
+          "$ref": "#/definitions/v1AnnotationMeta"
+        }
+      }
+    },
+    "v1AnnotationMeta": {
+      "type": "object",
+      "properties": {
+        "VideoID": {
+          "type": "string"
+        },
+        "Start": {
+          "type": "string",
+          "title": "should be in format mm:ss"
+        },
+        "End": {
+          "type": "string",
+          "title": "should be in format mm:ss"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Notes": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateAnnotationResponse": {
+      "type": "object",
+      "properties": {
+        "Annotation": {
+          "$ref": "#/definitions/v1Annotation"
+        }
+      }
+    },
+    "v1CreateVideoRequest": {
+      "type": "object",
+      "properties": {
+        "Video": {
+          "$ref": "#/definitions/v1Video"
+        }
+      }
+    },
+    "v1CreateVideoResponse": {
+      "type": "object",
+      "properties": {
+        "Video": {
+          "$ref": "#/definitions/v1Video"
+        }
+      }
+    },
+    "v1DeleteAnnotationResponse": {
+      "type": "object"
+    },
+    "v1DeleteVideoResponse": {
+      "type": "object"
+    },
+    "v1GetAnnotationsResponse": {
+      "type": "object",
+      "properties": {
+        "Annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Annotation"
+          }
+        }
+      }
+    },
+    "v1UpdateAnnotationResponse": {
+      "type": "object"
+    },
+    "v1Video": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string",
+          "title": "supposed to be youtube ID\r\nexample: from URL https://www.youtube.com/watch?v=dQw4w9WgXcQ ID is dQw4w9WgXcQ"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
